@@ -1,0 +1,15 @@
+main
+programa
+*.out
+*.exe
+*.o
+*.so
+
+# data/*.dat
+
+.vscode/
+.gdb_history
+*.dSYM/
+
+*.log
+.DS_Store

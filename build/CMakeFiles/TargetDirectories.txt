@@ -1,0 +1,5 @@
+/home/almagno/workspace/puc/aeds3/tp/build/CMakeFiles/SistemaMatricula.dir
+/home/almagno/workspace/puc/aeds3/tp/build/CMakeFiles/edit_cache.dir
+/home/almagno/workspace/puc/aeds3/tp/build/CMakeFiles/rebuild_cache.dir
+/home/almagno/workspace/puc/aeds3/tp/build/CMakeFiles/SistemaMatricula_autogen_timestamp_deps.dir
+/home/almagno/workspace/puc/aeds3/tp/build/CMakeFiles/SistemaMatricula_autogen.dir

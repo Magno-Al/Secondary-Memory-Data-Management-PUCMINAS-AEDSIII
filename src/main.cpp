@@ -1,91 +1,58 @@
-#include <iostream>
-#include <string>
+//========================================================================
+// Interface Gráfica 
+//========================================================================
+// #include <QApplication>
+// #include "views/TeacherWindow.h"
 
-#include "dao/StudentDAO.cpp"
-#include "models/Student.h"
+// int main(int argc, char *argv[])
+// {
+//     QApplication a(argc, argv);
+
+//     TeacherWindow w;
+//     w.show();
+
+//     return a.exec();
+// }
+
+//========================================================================
+// Interface Terminal
+//========================================================================
+#include <iostream>
+
+#include "views/terminal-interface/StudentInterface.h"
+#include "views/terminal-interface/ModuleInterface.h"
+#include "views/terminal-interface/RegistrationInterface.h"
 
 using namespace std;
 
-void menu() {
-    cout << "\n--- SISTEMA DE MATRÍCULA ---" << endl;
-    cout << "1. Cadastrar Estudante" << endl;
-    cout << "2. Listar Todos" << endl;
-    cout << "3. Buscar por ID" << endl;
-    cout << "4. Atualizar Estudante" << endl;
-    cout << "5. Excluir Estudante" << endl;
-    cout << "0. Sair" << endl;
-    cout << "Escolha: ";
-}
+int main()
+{
+    int mainOption;
 
-int main() {
-    StudentDAO dao;
-    int option, id;
-
-    do {
-        menu();
-        cin >> option;
+    do
+    {
+        mainMenu();
+        cin >> mainOption;
         cin.ignore();
 
-        switch (option) {
-            case 1: { // Cadastrar Estudante
-                Student s;
-                cout << "Nome: ";
-                cin.getline(s.name, 50);
-                cout << "Data Nascimento (DDMMYYYY): ";
-                cin >> s.birth_date;
-                
-                if (dao.create(s)) cout << "Sucesso! ID do novo estudante: " << s._id << endl;
-                break;
-            }
-            case 2: { // Listar Todos
-                dao.listAll();
-                break;
-            }
-            case 3: { // Buscar por ID
-                cout << "Digite o ID: ";
-                cin >> id;
-                Student s = dao.read(id);
-                if (s._id != -1 && !s.removed) {
-                    cout << "Encontrado: " << s.name << " | Data: " << s.birth_date << endl;
-                } else {
-                    cout << "Estudante nao encontrado." << endl;
-                }
-                break;
-            }
-            case 4: { // Atualizar Estudante
-                cout << "Digite o ID do estudante que deseja atualizar: ";
-                cin >> id;
-                cin.ignore();
-
-                Student s = dao.read(id);
-                if (s._id != -1) {
-                    cout << "Dados atuais -> Nome: " << s.name << " | Data: " << s.birth_date << endl;
-
-                    cout << "Digite o novo nome: ";
-                    cin.getline(s.name, 50);
-                    cout << "Digite a nova data (AAAAMMDD): ";
-                    cin >> s.birth_date;
-                    cin.ignore();
-
-                    if (dao.update(s)) {
-                        cout << "Estudante atualizado com sucesso!" << endl;
-                    } else {
-                        cout << "Erro ao atualizar os dados no arquivo." << endl;
-                    }
-                } else {
-                    cout << "Estudante com ID " << id << " nao encontrado." << endl;
-                }
-                break;
-            }
-            case 5: { // Excluir Estudante
-                cout << "ID para excluir: ";
-                cin >> id;
-                if (dao.remove(id)) cout << "Estudante excluido com sucesso." << endl;
-                else cout << "Erro ao excluir." << endl;
-                break;
-            }
+        switch (mainOption)
+        {
+        case 1:
+            StudentMenu();
+            break;
+        case 2:
+            ModuleMenu();
+            break;
+        case 3:
+            RegistrationMenu();
+            break;
+        case 0:
+            cout << "Encerrando o sistema..." << endl;
+            break;
+        default:
+            cout << "Opcao invalida. Tente novamente." << endl;
         }
-    } while (option != 0);
+    } while (mainOption != 0);
 
     return 0;
 }

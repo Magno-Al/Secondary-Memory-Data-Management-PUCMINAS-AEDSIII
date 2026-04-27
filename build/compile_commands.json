@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/almagno/workspace/puc/aeds3/tp/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/almagno/workspace/puc/aeds3/tp/build/SistemaMatricula_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/SistemaMatricula.dir/SistemaMatricula_autogen/mocs_compilation.cpp.o -c /home/almagno/workspace/puc/aeds3/tp/build/SistemaMatricula_autogen/mocs_compilation.cpp",
+  "file": "/home/almagno/workspace/puc/aeds3/tp/build/SistemaMatricula_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/almagno/workspace/puc/aeds3/tp/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/almagno/workspace/puc/aeds3/tp/build/SistemaMatricula_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/SistemaMatricula.dir/src/main.cpp.o -c /home/almagno/workspace/puc/aeds3/tp/src/main.cpp",
+  "file": "/home/almagno/workspace/puc/aeds3/tp/src/main.cpp"
+},
+{
+  "directory": "/home/almagno/workspace/puc/aeds3/tp/build",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/almagno/workspace/puc/aeds3/tp/build/SistemaMatricula_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -g -fPIC -std=gnu++17 -o CMakeFiles/SistemaMatricula.dir/src/views/TeacherWindow.cpp.o -c /home/almagno/workspace/puc/aeds3/tp/src/views/TeacherWindow.cpp",
+  "file": "/home/almagno/workspace/puc/aeds3/tp/src/views/TeacherWindow.cpp"
+}
+]

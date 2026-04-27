@@ -9,7 +9,7 @@ struct Student {
     int _id;
     int user_id;
     char name[50];
-    long birth_date;
+    int64_t birth_date;
 
     Student() {
         removed = false;

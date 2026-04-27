@@ -8,7 +8,7 @@
 
 class UserDAO{
     private:
-        std::string path = "..\\data\\users.dat";
+        std::string path = "C:/ProjetoAEDIII/TP2/data/users.dat";
 
     public:
         UserDAO(){
@@ -28,23 +28,6 @@ class UserDAO{
 
             FileManager::updateLastId(path, u._id);
             return true;
-        }
-
-        User login(const char* username, const char* password) {
-            std::ifstream file(path, std::ios::binary);
-            file.seekg(sizeof(int));
-
-            User u;
-            while (file.read(reinterpret_cast<char*>(&u), sizeof(User))) {
-                if (!u.removed && 
-                    strcmp(u.username, username) == 0 && 
-                    strcmp(u.password, password) == 0) {
-                    file.close();
-                    return u;
-                }
-            }
-            file.close();
-            return User(); // Retorna user com ID -1 se falhar
         }
 
         User read(int id) {

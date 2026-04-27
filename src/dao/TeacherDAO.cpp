@@ -6,7 +6,7 @@
 
 class TeacherDAO{
     private:
-        std::string path = "..\\data\\teachers.dat";  
+        std::string path = "C:/ProjetoAEDIII/TP2/data/teachers.dat";  
 
     public:
         TeacherDAO(){

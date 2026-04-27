@@ -8,7 +8,7 @@
 
 class EmailDAO {
 private:
-    std::string path = "..\\data\\emails.dat";
+    std::string path = "C:/ProjetoAEDIII/TP2/data/emails.dat";
 
 public:
     EmailDAO() {

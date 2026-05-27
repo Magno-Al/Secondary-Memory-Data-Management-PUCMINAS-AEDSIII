@@ -1,5 +1,7 @@
 main
 programa
+sistema_matriculas
+build/sistema_matriculas
 *.out
 *.exe
 *.o

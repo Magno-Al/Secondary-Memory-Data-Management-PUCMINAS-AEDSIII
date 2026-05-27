@@ -16,7 +16,15 @@ void StudentMenu()
 
     do
     {
-        crudMenu("ESTUDANTES");
+        cout << "\n--- ESTUDANTES ---" << endl;
+        cout << "1. Cadastrar" << endl;
+        cout << "2. Listar Todos" << endl;
+        cout << "3. Buscar por ID" << endl;
+        cout << "4. Atualizar" << endl;
+        cout << "5. Excluir" << endl;
+        cout << "6. Listar Ordenados por ID (Arvore B+)" << endl;
+        cout << "0. Voltar ao Menu Principal" << endl;
+        cout << "Escolha: ";
         cin >> option;
         cin.ignore();
 
@@ -56,7 +64,7 @@ void StudentMenu()
             if (s._id != -1)
                 cout << "Encontrado: " << s.name << " | Data: " << s.birth_date << endl;
             else
-                cout << "Não encontrado." << endl;
+                cout << "Nao encontrado." << endl;
             break;
         }
         case 4:
@@ -76,7 +84,7 @@ void StudentMenu()
                     cout << "Atualizado com sucesso!\n";
             }
             else
-                cout << "Não encontrado.\n";
+                cout << "Nao encontrado.\n";
             break;
         }
         case 5:
@@ -87,6 +95,11 @@ void StudentMenu()
                 cout << "Excluido com sucesso!\n";
             else
                 cout << "Erro ao excluir.\n";
+            break;
+        }
+        case 6:
+        {
+            dao.listAllOrderedById();
             break;
         }
         }

@@ -4,7 +4,7 @@
 
 #include "../models/Registration.h"
 #include "../utils/CrudTemplate.h"
-#include "../utils/ExtendableHash.h"
+#include "../indexes/hash/ExtendableHash.h"
 
 class RegistrationDAO : public CrudTemplate<Registration> 
 {

@@ -1,7 +1,9 @@
 main
 programa
 sistema_matriculas
-build/sistema_matriculas
+build/*
+!build/sistema_matriculas_linux
+!build/sistema_matriculas.exe
 *.out
 *.exe
 *.o

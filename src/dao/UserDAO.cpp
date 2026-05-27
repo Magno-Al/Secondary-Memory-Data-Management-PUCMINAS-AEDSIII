@@ -9,7 +9,7 @@
 class UserDAO
 {
 private:
-    std::string path = "..\\data\\users.dat";
+    std::string path = "data/users.dat";
 
 public:
     UserDAO()

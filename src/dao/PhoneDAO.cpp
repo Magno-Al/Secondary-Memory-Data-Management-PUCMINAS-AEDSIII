@@ -9,7 +9,7 @@
 class PhoneDAO
 {
 private:
-    std::string path = "..\\data\\phones.dat";
+    std::string path = "data/phones.dat";
 
 public:
     PhoneDAO()

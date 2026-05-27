@@ -11,8 +11,8 @@ class StudentDAO : public CrudTemplate<Student> {
 
 public:
     StudentDAO()
-        : CrudTemplate<Student>("../data/students.dat"),
-          indexPath("../data/students.idx"),
+        : CrudTemplate<Student>("data/students.dat"),
+          indexPath("data/students.idx"),
           index(indexPath) {}
 
     bool create(Student &s) {

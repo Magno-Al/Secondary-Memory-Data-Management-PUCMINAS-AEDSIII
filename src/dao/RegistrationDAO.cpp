@@ -13,8 +13,8 @@ private:
 
 public:
     RegistrationDAO() : 
-        CrudTemplate<Registration>("../data/registration.dat"),
-        index("../data/index_dir.dat", "../data/index_buckets.dat") {}
+        CrudTemplate<Registration>("data/registration.dat"),
+        index("data/index_dir.dat", "data/index_buckets.dat") {}
 
     bool create(Registration &r)
     {

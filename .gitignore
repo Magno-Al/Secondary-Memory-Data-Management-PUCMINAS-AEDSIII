@@ -1,9 +1,6 @@
 main
 programa
 sistema_matriculas
-build/*
-!build/sistema_matriculas_linux
-!build/sistema_matriculas.exe
 *.out
 *.exe
 *.o
@@ -17,3 +14,7 @@ build/*
 
 *.log
 .DS_Store
+
+build/*
+!build/sistema_matriculas_linux
+!build/sistema_matriculas.exe

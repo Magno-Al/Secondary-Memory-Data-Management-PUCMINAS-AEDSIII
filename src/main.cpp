@@ -18,6 +18,7 @@
 // Interface Terminal
 //========================================================================
 #include <iostream>
+#include <filesystem>
 
 #include "views/terminal-interface/StudentInterface.h"
 #include "views/terminal-interface/ModuleInterface.h"
@@ -27,6 +28,8 @@ using namespace std;
 
 int main()
 {
+    filesystem::create_directories("data");
+
     int mainOption;
 
     do

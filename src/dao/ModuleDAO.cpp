@@ -4,5 +4,5 @@
 class ModuleDAO : public CrudTemplate<Module> 
 {
     public:
-        ModuleDAO() : CrudTemplate<Module>("../data/module.dat") {}
+        ModuleDAO() : CrudTemplate<Module>("data/module.dat") {}
 };

@@ -32,7 +32,8 @@ public:
         std::string outputPath;
     };
 
-    static const std::string DATA_DIR;
+    static const std::string DATA_DIR;    
+    static const std::string COMPRESS_DIR; 
     static const std::string HUFFMAN_BACKUP;
     static const std::string LZW_BACKUP;
 
@@ -55,6 +56,8 @@ public:
 
         std::vector<unsigned char> compressed =
             (algo == Algorithm::HUFFMAN) ? Huffman::compress(blob) : LZW::compress(blob);
+
+        fs::create_directories(COMPRESS_DIR);
 
         std::string out = backupPath(algo);
         std::ofstream file(out, std::ios::binary | std::ios::trunc);
@@ -218,7 +221,8 @@ private:
 };
 
 inline const std::string BackupManager::DATA_DIR = "data";
-inline const std::string BackupManager::HUFFMAN_BACKUP = "data/backup_huffman.huff";
-inline const std::string BackupManager::LZW_BACKUP = "data/backup_lzw.lzw";
+inline const std::string BackupManager::COMPRESS_DIR = "data-compress";
+inline const std::string BackupManager::HUFFMAN_BACKUP = "data-compress/backup_huffman.huff";
+inline const std::string BackupManager::LZW_BACKUP = "data-compress/backup_lzw.lzw";
 
 #endif

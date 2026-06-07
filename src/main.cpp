@@ -29,7 +29,8 @@ using namespace std;
 
 int main()
 {
-    filesystem::create_directories("data");
+    filesystem::create_directories("data");          // arquivos de dados do sistema
+    filesystem::create_directories("data-compress"); // arquivos compactados (backups)
 
     int mainOption;
 

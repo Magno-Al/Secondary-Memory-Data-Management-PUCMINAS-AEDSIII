@@ -12,6 +12,7 @@ void mainMenu()
     std::cout << "1. Gerenciar Estudantes" << std::endl;
     std::cout << "2. Gerenciar Modulos (Cursos)" << std::endl;
     std::cout << "3. Gerenciar Matriculas" << std::endl;
+    std::cout << "4. Backup / Compressao (Huffman e LZW)" << std::endl;
     std::cout << "0. Sair do Programa" << std::endl;
     std::cout << "Escolha: ";
     std::cout << "\n";

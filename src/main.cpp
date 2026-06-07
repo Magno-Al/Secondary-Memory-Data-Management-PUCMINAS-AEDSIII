@@ -23,6 +23,7 @@
 #include "views/terminal-interface/StudentInterface.h"
 #include "views/terminal-interface/ModuleInterface.h"
 #include "views/terminal-interface/RegistrationInterface.h"
+#include "views/terminal-interface/BackupInterface.h"
 
 using namespace std;
 
@@ -48,6 +49,9 @@ int main()
             break;
         case 3:
             RegistrationMenu();
+            break;
+        case 4:
+            BackupMenu();
             break;
         case 0:
             cout << "Encerrando o sistema..." << endl;

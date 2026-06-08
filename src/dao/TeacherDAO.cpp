@@ -29,12 +29,14 @@ public:
         file.close();
 
         FileManager::updateLastId(path, t._id);
-        return false;
+        return true;
     }
 
     Teacher read(int id)
     {
         std::ifstream file(path, std::ios::binary);
+        if (!file.is_open())
+            return Teacher();
         file.seekg(sizeof(int));
 
         Teacher t;
@@ -79,6 +81,8 @@ public:
     bool remove(int id)
     {
         std::fstream file(path, std::ios::binary | std::ios::in | std::ios::out);
+        if (!file.is_open())
+            return false;
         file.seekg(sizeof(int));
 
         Teacher t;

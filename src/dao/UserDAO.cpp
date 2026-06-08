@@ -20,7 +20,7 @@ public:
     bool create(User &u)
     {
         int LastId = FileManager::getLastId(path);
-        u._id = LastId = 1;
+        u._id = LastId + 1;
         u.removed = false;
 
         std::ofstream file(path, std::ios::binary | std::ios::app);
@@ -37,6 +37,8 @@ public:
     User login(const char *username, const char *password)
     {
         std::ifstream file(path, std::ios::binary);
+        if (!file.is_open())
+            return User();
         file.seekg(sizeof(int));
 
         User u;
@@ -57,6 +59,8 @@ public:
     User read(int id)
     {
         std::ifstream file(path, std::ios::binary);
+        if (!file.is_open())
+            return User();
         file.seekg(sizeof(int));
 
         User u;
@@ -100,6 +104,8 @@ public:
     bool remove(int id)
     {
         std::fstream file(path, std::ios::binary | std::ios::in | std::ios::out);
+        if (!file.is_open())
+            return false;
         file.seekg(sizeof(int));
 
         User u;

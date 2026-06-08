@@ -37,6 +37,8 @@ public:
     Email read(int id)
     {
         std::ifstream file(path, std::ios::binary);
+        if (!file.is_open())
+            return Email();
         file.seekg(sizeof(int));
 
         Email e;
@@ -80,6 +82,8 @@ public:
     bool remove(int id)
     {
         std::fstream file(path, std::ios::binary | std::ios::in | std::ios::out);
+        if (!file.is_open())
+            return false;
         file.seekg(sizeof(int));
 
         Email e;

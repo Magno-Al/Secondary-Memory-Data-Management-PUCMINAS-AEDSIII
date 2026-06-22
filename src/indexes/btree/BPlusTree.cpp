@@ -2,14 +2,14 @@
 #include <algorithm>
 
 // Construtor: Inicializa o nome do arquivo e gerencia o cabeçalho do índice
-BPlusTree::BPlusTree(std::string nomeArquivoIndice) {
+inline BPlusTree::BPlusTree(std::string nomeArquivoIndice) {
     this->arquivoIndiceNome = nomeArquivoIndice;
     this->raizOffset = -1;
     inicializarArquivoIndice();
 }
 
 // Inicializa o arquivo de índice se ele não existir, lendo/escrevendo o offset da raiz no início (bytes 0 a 7)
-void BPlusTree::inicializarArquivoIndice() {
+inline void BPlusTree::inicializarArquivoIndice() {
     std::fstream arq(arquivoIndiceNome, std::ios::binary | std::ios::in | std::ios::out);
     
     if (!arq.is_open()) {
@@ -28,13 +28,13 @@ void BPlusTree::inicializarArquivoIndice() {
 }
 
 // Escreve um nó em uma posição física (offset) específica do arquivo de índices
-void BPlusTree::gravarNo(std::fstream& arq, long offset, const NoBPlus& no) {
+inline void BPlusTree::gravarNo(std::fstream& arq, long offset, const NoBPlus& no) {
     arq.seekp(offset, std::ios::beg);
     arq.write(reinterpret_cast<const char*>(&no), sizeof(NoBPlus));
 }
 
 // Lê um nó de uma posição física (offset) específica do arquivo de índices
-NoBPlus BPlusTree::lerNo(std::fstream& arq, long offset) {
+inline NoBPlus BPlusTree::lerNo(std::fstream& arq, long offset) {
     NoBPlus no;
     if (offset == -1) return no;
     arq.seekg(offset, std::ios::beg);
@@ -43,13 +43,13 @@ NoBPlus BPlusTree::lerNo(std::fstream& arq, long offset) {
 }
 
 // Aloca espaço no fim do arquivo para um novo nó e retorna o seu offset
-long BPlusTree::alocarNovoNo(std::fstream& arq) {
+inline long BPlusTree::alocarNovoNo(std::fstream& arq) {
     arq.seekp(0, std::ios::end);
     return arq.tellp();
 }
 
 // Retorna o offset do primeiro nó folha da árvore (o mais à esquerda)
-long BPlusTree::getPrimeiroFolhaOffset() {
+inline long BPlusTree::getPrimeiroFolhaOffset() {
     if (this->raizOffset == -1) return -1;
 
     std::fstream arq(arquivoIndiceNome, std::ios::binary | std::ios::in);
@@ -66,7 +66,7 @@ long BPlusTree::getPrimeiroFolhaOffset() {
 }
 
 // Busca por um ID na árvore e retorna o offset dele no arquivo de dados (.dat)
-long BPlusTree::buscar(int id) {
+inline long BPlusTree::buscar(int id) {
     if (this->raizOffset == -1) return -1; // Árvore vazia
 
     std::fstream arq(arquivoIndiceNome, std::ios::binary | std::ios::in);
@@ -100,7 +100,7 @@ long BPlusTree::buscar(int id) {
 }
 
 // Insere uma nova chave de forma ordenada em um nó folha que possui espaço
-void BPlusTree::inserirNaFolha(NoBPlus& folha, int id, long offsetDados) {
+inline void BPlusTree::inserirNaFolha(NoBPlus& folha, int id, long offsetDados) {
     int i = folha.numChaves - 1;
     while (i >= 0 && folha.chaves[i] > id) {
         folha.chaves[i + 1] = folha.chaves[i];
@@ -113,7 +113,7 @@ void BPlusTree::inserirNaFolha(NoBPlus& folha, int id, long offsetDados) {
 }
 
 // Divide um nó folha cheio criando um novo nó à direita e gerenciando o encadeamento lateral
-void BPlusTree::dividirFolha(std::fstream& arq, long folhaOffset, NoBPlus& folha, int id, long offsetDados, int& chavePromovida, long& novoNoOffset) {
+inline void BPlusTree::dividirFolha(std::fstream& arq, long folhaOffset, NoBPlus& folha, int id, long offsetDados, int& chavePromovida, long& novoNoOffset) {
     // Cria arrays temporários para comportar o elemento excedente antes da partição
     int tempChaves[ORDEM];
     long tempDados[ORDEM];
@@ -169,7 +169,7 @@ void BPlusTree::dividirFolha(std::fstream& arq, long folhaOffset, NoBPlus& folha
 }
 
 // Divide um nó interno cheio jogando o elemento do meio estritamente para o pai
-void BPlusTree::dividirInterno(std::fstream& arq, long internoOffset, NoBPlus& interno, int indiceFilho, int chaveFilhoPromovida, long filhoNovoOffset, int& chavePromovida, long& novoNoOffset) {
+inline void BPlusTree::dividirInterno(std::fstream& arq, long internoOffset, NoBPlus& interno, int indiceFilho, int chaveFilhoPromovida, long filhoNovoOffset, int& chavePromovida, long& novoNoOffset) {
     int tempChaves[ORDEM];
     long tempFilhos[ORDEM + 1];
 
@@ -219,7 +219,7 @@ void BPlusTree::dividirInterno(std::fstream& arq, long internoOffset, NoBPlus& i
 }
 
 // Insere de baixo para cima a chave promovida no nó pai correspondente
-void BPlusTree::inserirNoPai(std::fstream& arq, long noFilhoOffset, int chavePromovida, long noNovoFilhoOffset) {
+inline void BPlusTree::inserirNoPai(std::fstream& arq, long noFilhoOffset, int chavePromovida, long noNovoFilhoOffset) {
     // Caso Especial: O nó dividido era a própria Raiz. Logo, cria-se uma nova Raiz no topo.
     if (noFilhoOffset == this->raizOffset) {
         NoBPlus novaRaiz;
@@ -290,7 +290,7 @@ void BPlusTree::inserirNoPai(std::fstream& arq, long noFilhoOffset, int chavePro
 }
 
 // Método Principal Público: Insere a dupla (ID, Offset do arquivo .dat) no índice
-void BPlusTree::inserir(int id, long offsetDados) {
+inline void BPlusTree::inserir(int id, long offsetDados) {
     std::fstream arq(arquivoIndiceNome, std::ios::binary | std::ios::in | std::ios::out);
 
     // Caso Inicial: A árvore está 100% vazia

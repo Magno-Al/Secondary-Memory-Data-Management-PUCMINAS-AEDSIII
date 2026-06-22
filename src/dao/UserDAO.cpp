@@ -2,9 +2,11 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstring>
 
 #include "../models/User.h"
 #include "../utils/FileManager.h"
+#include "../utils/crypto/XorCipher.h"
 
 class UserDAO
 {
@@ -22,6 +24,10 @@ public:
         int LastId = FileManager::getLastId(path);
         u._id = LastId + 1;
         u.removed = false;
+
+        // Campo sensivel: a senha e gravada cifrada com XOR (todo o buffer de
+        // tamanho fixo, inclusive o padding, para nao vazar o comprimento).
+        XorCipher::apply(u.password, sizeof(u.password));
 
         std::ofstream file(path, std::ios::binary | std::ios::app);
         if (!file.is_open())
@@ -42,11 +48,18 @@ public:
         file.seekg(sizeof(int));
 
         User u;
+
+        // Cifra a senha informada exatamente como foi gravada (buffer fixo,
+        // zero-padded) para comparar com a versao armazenada via memcmp.
+        char encInput[sizeof(u.password)] = {0};
+        std::strncpy(encInput, password, sizeof(encInput) - 1);
+        XorCipher::apply(encInput, sizeof(encInput));
+
         while (file.read(reinterpret_cast<char *>(&u), sizeof(User)))
         {
             if (!u.removed &&
-                strcmp(u.username, username) == 0 &&
-                strcmp(u.password, password) == 0)
+                std::strcmp(u.username, username) == 0 &&
+                std::memcmp(u.password, encInput, sizeof(encInput)) == 0)
             {
                 file.close();
                 return u;

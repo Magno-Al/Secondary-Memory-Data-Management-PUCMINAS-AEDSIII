@@ -1,7 +1,7 @@
 # Sistema de Matrículas — AEDS3 | PUC Minas
 
-Trabalho Prático — Entrega 4  
-Gerenciamento de Alunos, Módulos e Matrículas com persistência em arquivos binários, Árvore B+, Hash Extensível e compressão de backup (Huffman e LZW).
+Trabalho Prático — Entrega 5  
+Gerenciamento de Alunos, Módulos e Matrículas com persistência em arquivos binários, Árvore B+, Hash Extensível, compressão de backup (Huffman e LZW), casamento de padrões (KMP e Boyer–Moore) e criptografia XOR.
 
 ---
 
@@ -12,6 +12,8 @@ Gerenciamento de Alunos, Módulos e Matrículas com persistência em arquivos bi
 - **Árvore B+** (`ORDEM=4`) para listagem de alunos ordenados por ID
 - **Hash Extensível** para busca de matrículas por módulo (O(1))
 - **Compressão / Backup** de todos os arquivos de dados em um único arquivo, com **Huffman** e **LZW**, incluindo restauração
+- **Casamento de padrões** (**KMP** e **Boyer–Moore**) na busca por nome de Aluno e de Curso
+- **Criptografia XOR** da senha do usuário (campo sensível)
 - Interface de terminal interativa
 
 ---
@@ -103,6 +105,39 @@ No menu principal, a opção **`4. Backup / Compressao`** dá acesso às operaç
 > Observação: para volumes muito pequenos de dados, o cabeçalho do Huffman (tabela de
 > frequências) pode tornar o arquivo comprimido maior que o original — comportamento
 > esperado; os ganhos aparecem conforme o volume de dados cresce.
+
+---
+
+## Pesquisa por padrão e Criptografia (Entrega 5)
+
+### Casamento de padrões (KMP e Boyer–Moore)
+
+No menu principal, a opção **`5. Pesquisar por padrao (KMP / BM)`**:
+
+```text
+--- PESQUISA POR PADRAO (KMP / Boyer-Moore) ---
+Pesquisar em:  1. Nome do Aluno   2. Nome do Curso (Modulo)
+Algoritmo:     1. KMP             2. Boyer-Moore (bad character)
+Padrao a pesquisar: <string>
+```
+
+- O usuário escolhe **o campo** (nome do Aluno ou do Curso), **o algoritmo** (KMP ou
+  Boyer–Moore) e informa o **padrão**; o sistema lista os registros cujo campo contém o padrão.
+- A busca é **case-insensitive**. Os algoritmos são header-only em `src/utils/pattern/`
+  (`KMP.h` — tabela LPS; `BoyerMoore.h` — regra *bad character*).
+- Na **GUI**, a aba **Pesquisa** oferece a mesma funcionalidade, e o filtro da aba **Alunos**
+  também usa KMP/Boyer–Moore (com seletor de algoritmo).
+
+### Criptografia XOR
+
+- A **senha do usuário** (`User.password`) é o campo sensível: é gravada **cifrada com XOR**
+  (chave fixa repetida) em `data/users.dat`, e nunca exibida em texto puro.
+- A cifragem é centralizada no `UserDAO` (`src/utils/crypto/XorCipher.h`): `create` cifra antes
+  de gravar e `login` cifra a senha informada e compara com a armazenada.
+
+> **Importante:** se você já possui um `data/users.dat` criado **antes** desta etapa (senha em
+> texto puro), apague-o (ou a pasta `data/`) — em uma execução nova o usuário gerente padrão
+> (`gerente` / `gerente`) é recriado já com a senha cifrada.
 
 ---
 

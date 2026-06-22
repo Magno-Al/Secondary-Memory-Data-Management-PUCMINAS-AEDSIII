@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "../models/Teacher.h"
 #include "../utils/FileManager.h"
@@ -101,6 +102,24 @@ public:
         }
         file.close();
         return false;
+    }
+
+    std::vector<Teacher> readAll()
+    {
+        std::vector<Teacher> list;
+        std::ifstream file(path, std::ios::binary);
+        if (!file.is_open())
+            return list;
+
+        file.seekg(sizeof(int));
+        Teacher t;
+        while (file.read(reinterpret_cast<char *>(&t), sizeof(Teacher)))
+        {
+            if (!t.removed)
+                list.push_back(t);
+        }
+        file.close();
+        return list;
     }
 
     void listAll()

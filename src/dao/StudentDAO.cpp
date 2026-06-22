@@ -1,3 +1,6 @@
+#ifndef STUDENT_DAO_CPP
+#define STUDENT_DAO_CPP
+
 #include <fstream>
 #include "../models/Student.h"
 #include "../indexes/btree/BPlusTree.h"
@@ -84,4 +87,34 @@ public:
         arqIdx.close();
         arqDat.close();
     }
+
+    // Mesma travessia ordenada da Arvore B+, mas retornando os estudantes
+    // num vetor (em vez de imprimir) — usado pela interface grafica.
+    std::vector<Student> listOrderedById() {
+        std::vector<Student> ordered;
+        long leafOffset = index.getPrimeiroFolhaOffset();
+        if (leafOffset == -1)
+            return ordered;
+
+        std::fstream arqIdx(indexPath, std::ios::binary | std::ios::in);
+        std::ifstream arqDat(path, std::ios::binary);
+
+        while (leafOffset != -1) {
+            NoBPlus no = index.lerNoExterno(arqIdx, leafOffset);
+            for (int i = 0; i < no.numChaves; i++) {
+                arqDat.seekg(no.ponteirosDados[i]);
+                Student s;
+                arqDat.read(reinterpret_cast<char*>(&s), sizeof(Student));
+                if (!s.removed)
+                    ordered.push_back(s);
+            }
+            leafOffset = no.proximaFolha;
+        }
+
+        arqIdx.close();
+        arqDat.close();
+        return ordered;
+    }
 };
+
+#endif // STUDENT_DAO_CPP

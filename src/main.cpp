@@ -1,17 +1,13 @@
-//========================================================================
-// Interface Gráfica 
-//========================================================================
-// #include <QApplication>
-// #include "views/TeacherWindow.h"
-
-// int main(int argc, char *argv[])
+// ========================================================================
+// Interface Gráfica (Qt6 / QtWidgets)
+// Para usar a GUI: descomente este bloco e COMENTE o bloco de terminal abaixo.
+// Build da GUI: cmake -S . -B build && cmake --build build
+// ========================================================================
+// #include "views/gui/GuiApp.h"
+//
+// int main(int argc, char **argv)
 // {
-//     QApplication a(argc, argv);
-
-//     TeacherWindow w;
-//     w.show();
-
-//     return a.exec();
+//     return runGui(argc, argv);
 // }
 
 //========================================================================
@@ -24,6 +20,7 @@
 #include "views/terminal-interface/ModuleInterface.h"
 #include "views/terminal-interface/RegistrationInterface.h"
 #include "views/terminal-interface/BackupInterface.h"
+#include "views/terminal-interface/SearchInterface.h"
 
 using namespace std;
 
@@ -53,6 +50,9 @@ int main()
             break;
         case 4:
             BackupMenu();
+            break;
+        case 5:
+            SearchMenu();
             break;
         case 0:
             cout << "Encerrando o sistema..." << endl;

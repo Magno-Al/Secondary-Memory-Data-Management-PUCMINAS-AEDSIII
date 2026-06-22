@@ -24,6 +24,8 @@
 #include "views/terminal-interface/ModuleInterface.h"
 #include "views/terminal-interface/RegistrationInterface.h"
 #include "views/terminal-interface/BackupInterface.h"
+#include "views/terminal-interface/UserInterface.h"
+
 
 using namespace std;
 
@@ -53,6 +55,9 @@ int main()
             break;
         case 4:
             BackupMenu();
+            break;
+        case 5:
+            UserMenu(userDao); 
             break;
         case 0:
             cout << "Encerrando o sistema..." << endl;

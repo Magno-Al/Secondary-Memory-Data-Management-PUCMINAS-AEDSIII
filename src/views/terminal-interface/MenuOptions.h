@@ -13,12 +13,13 @@ void mainMenu()
     std::cout << "2. Gerenciar Modulos (Cursos)" << std::endl;
     std::cout << "3. Gerenciar Matriculas" << std::endl;
     std::cout << "4. Backup / Compressao (Huffman e LZW)" << std::endl;
+    std::cout << "5. Pesquisar Usuarios por Padrao (KMP / Boyer-Moore)" << std::endl;;
     std::cout << "0. Sair do Programa" << std::endl;
     std::cout << "Escolha: ";
     std::cout << "\n";
 }
 
-void crudMenu(const std::string &title)
+inline void crudMenu(const std::string &title)
 {
     std::cout << "\n--- " << title << " ---" << std::endl;
     std::cout << "1. Cadastrar" << std::endl;
